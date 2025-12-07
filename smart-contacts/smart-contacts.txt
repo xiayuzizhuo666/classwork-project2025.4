@@ -1,0 +1,14 @@
+smart-contacts/
+├── index.html           # 主页面结构
+├── css/
+│   └── styles.css       # 样式文件
+└── js/
+    ├── core/
+    │   ├── Contact.js   # 联系人数据模型
+    │   └── ContactManager.js  # 联系人管理核心类
+    ├── ui/
+    │   ├── Modal.js     # 模态框基类
+    │   ├── AddContactModal.js # 添加联系人模态框(继承Modal)
+    │   ├── DetailModal.js     # 详情模态框(继承Modal)
+    │   └── ContactList.js     # 联系人列表UI渲染
+    └── app.js           # 应用入口，协调各模块

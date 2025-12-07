@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能通讯录管理系统</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">首页</a></li>
+                <li><a href="#contacts" class="nav-link">通讯录</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 首页 -->
+        <div id="home" class="page">
+            <div class="card">
+                <h2>欢迎使用智能通讯录管理系统</h2>
+                <p>当前版本：3.0</p>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="showAddModal()">添加联系人</button>
+                    <button class="btn btn-primary" onclick="navigate('contacts')">浏览通讯录</button>
+                    <button class="btn btn-success" onclick="exportAllContacts()">导出全部联系人</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 通讯录页面 -->
+        <div id="contacts" class="page" style="display: none;">
+            <div class="card">
+                <div class="category-tabs">
+                    <button class="tab-btn active" data-category="all">全部</button>
+                    <button class="tab-btn" data-category="办公">办公</button>
+                    <button class="tab-btn" data-category="个人">个人</button>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-success" onclick="exportCurrentCategory()">导出当前分类</button>
+                    <button class="btn btn-danger" onclick="clearAllContacts()" id="clearAllBtn">清空全部联系人</button>
+                </div>
+
+                <div class="search-box">
+                    <i class="search-icon">🔍</i>
+                    <input type="text" placeholder="搜索联系人...">
+                </div>
+                
+                <div class="sort-options">
+                    <label for="sortOrder">排序方式：</label>
+                    <select id="sortOrder">
+                        <option value="desc">最新创建</option>
+                        <option value="asc">最早创建</option>
+                    </select>
+                </div>
+
+                <div class="contact-grid" id="contactList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加联系人模态框 -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <h3 class="modal-title">添加联系人</h3>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label>电话</label>
+                    <input type="tel" id="phone" required pattern="[\d-]{7,}">
+                </div>
+                <div class="form-group">
+                    <label>单位</label>
+                    <input type="text" id="address" required>
+                </div>
+                <div class="form-group">
+                    <label>类别</label>
+                    <select id="category">
+                        <option value="办公">办公</option>
+                        <option value="个人">个人</option>
+                    </select>
+                </div>
+                <div class="action-buttons">
+                    <button type="button" class="btn" onclick="closeModal()">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 联系人详情模态框 -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <h3 class="modal-title">联系人详情</h3>
+            <div class="contact-detail">
+                <p><strong>姓名：</strong><span id="detailName"></span></p>
+                <p><strong>电话：</strong><span id="detailPhone"></span> 
+                    <button class="btn btn-icon">📋</button>
+                </p>
+                <p><strong>单位：</strong><span id="detailAddress"></span></p>
+                <p><strong>类别：</strong><span id="detailCategory"></span></p>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="editCurrentContact()">编辑联系人</button>
+                <button class="btn btn-danger" onclick="deleteCurrentContact()">删除联系人</button>
+                <button class="btn btn" onclick="closeDetailModal()">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入脚本(使用模块类型) -->
+    <script type="module" src="js/app.js"></script>
+    <!-- 测试脚本，在生产环境中可以移除 -->
+    <!-- <script src="test_functions.js"></script> -->
+</body>
+</html>
