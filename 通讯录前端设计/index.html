@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能通讯录管理系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">首页</a></li>
+                <li><a href="#contacts" class="nav-link">通讯录</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="home" class="page">
+            <div class="card">
+                <h2>欢迎使用智能通讯录管理系统</h2>
+                <p>当前版本：2.0</p>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="showAddModal()">添加联系人</button>
+                    <button class="btn btn-primary" onclick="navigate('contacts')">浏览通讯录</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="contacts" class="page" style="display: none;">
+            <div class="card">
+                <div class="category-tabs">
+                    <button class="tab-btn active" onclick="filterContacts('all')">全部</button>
+                    <button class="tab-btn" onclick="filterContacts('办公')">办公</button>
+                    <button class="tab-btn" onclick="filterContacts('个人')">个人</button>
+                </div>
+                
+                <div class="search-box">
+                    <i class="search-icon">🔍</i>
+                    <input type="text" placeholder="搜索联系人..." oninput="searchContacts(this.value)">
+                </div>
+
+                <div class="contact-grid" id="contactList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <h3 class="modal-title">添加联系人</h3>
+            <form id="contactForm" onsubmit="saveContact(event)">
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label>电话</label>
+                    <input type="tel" id="phone" required pattern="[\d-]{7,}">
+                </div>
+                <div class="form-group">
+                    <label>单位</label>
+                    <input type="text" id="address" required>
+                </div>
+                <div class="form-group">
+                    <label>类别</label>
+                    <select id="category">
+                        <option value="办公">办公</option>
+                        <option value="个人">个人</option>
+                    </select>
+                </div>
+                <div class="action-buttons">
+                    <button type="button" class="btn" onclick="closeModal()">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
